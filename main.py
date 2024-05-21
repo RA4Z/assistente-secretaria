@@ -1,7 +1,8 @@
 import google.generativeai as genai
 from data import historico
+import os
 
-genai.configure(api_key="AIzaSyBUQf8VqIlaSaOxRphJQYTWK8UprC2LboY")
+genai.configure(api_key=os.environ['GEMINI_API_KEY'])
 
 generation_config = {
   "temperature": 0,
