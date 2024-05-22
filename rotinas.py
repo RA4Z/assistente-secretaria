@@ -24,5 +24,17 @@ def semanais():
     json.dump(indicadores, open('data/semanais.json', 'w', encoding='utf-8'), indent=4)
 
 
+def mensais():
+    indicadores = json.load(open('data/mensais.json', 'r', encoding='utf-8'))
+    for indicador in indicadores:
+        mes_indicador = datetime.strptime(indicador['LastUpdate'],'%Y-%m-%d').month
+        mes_atual = date.today().month
+        if mes_indicador == mes_atual:
+            indicador['Status'] = "Realizado"
+        else:
+            indicador['Status'] = "Pendente"
+    json.dump(indicadores, open('data/mensais.json', 'w', encoding='utf-8'), indent=4)
+
+
 diarios()
 

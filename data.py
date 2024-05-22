@@ -78,3 +78,18 @@ historico.append({
         str(semanais),
     ]
 })
+
+#INDICADORES MENSAIS
+mensais = json.load(open('data/mensais.json', 'r', encoding='utf-8'))
+historico.append({
+    "role": "user",
+    "parts": [
+        f"Status atual de todos os indicadores mensais da secretária"
+    ]
+})
+historico.append({
+    "role": "model",
+    "parts": [
+        str(mensais),
+    ]
+})
