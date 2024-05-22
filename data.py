@@ -49,6 +49,7 @@ for path in paths:
 
 
 #VERIFICAR STATUS DE INDICADORES
+#INDICADORES DIÁRIOS
 diarios = json.load(open('data/diarios.json', 'r', encoding='utf-8'))
 historico.append({
     "role": "user",
@@ -60,5 +61,20 @@ historico.append({
     "role": "model",
     "parts": [
         str(diarios),
+    ]
+})
+
+#INDICADORES SEMANAIS
+semanais = json.load(open('data/semanais.json', 'r', encoding='utf-8'))
+historico.append({
+    "role": "user",
+    "parts": [
+        f"Status atual de todos os indicadores semanais da secretária"
+    ]
+})
+historico.append({
+    "role": "model",
+    "parts": [
+        str(semanais),
     ]
 })
