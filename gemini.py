@@ -41,18 +41,42 @@ model = genai.GenerativeModel(
     Caso a informação não esteja no meu contexto responderei: 'Desculpe,😞\n me perdi no raciocínio...😭\n Poderia reformular o seu comando?😅'"""
 )
 
-chat_session = model.start_chat(
-  history= historico
-)
+class GeminiAI():
+  def __init__(self):
+    self.chat_session = model.start_chat(
+      history= historico
+    )
+  
+  def send_message(self, message):
+    message = f"""
+      Preste atenção às informações no histórico de conversas;
+      JAMAIS CITE A EXISTÊNCIA DO HISTÓRICO DE NOSSAS CONVERSAS;
+      Busque informações sobre o procedimento do indicador: {message};
+      Separe o procedimento retornado em vários tópicos, não fazendo uso de subtópicos, deve estar escrito <topico> na frente de cada tópico;
+      Crie um resumo sobre o indicador correspondente ao comando, usando seus conhecimentos prévios baseados em todos os procedimentos, informações da agenda PCP, normas, etc. auxilie com informações de melhores práticas, como otimizar o tempo, etc., também informe a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado;
+      
+      Siga o padrão:
 
-message = ""
+      
+       <topico> Informações sobre o tópico 1;
+       <topico> Informações sobre o tópico 2;
+       <topico> Informações sobre o tópico 3;
+       <topico> Informações sobre o tópico 4;
+       Resumo do indicador...
 
-while message != 'exit':
-    message = input('\nInsira seu comando para a IA ("exit" para sair)...\n')
-    if message.lower().strip() == 'exit': break
+    """
+    response = self.chat_session.send_message(message).text
+    linhas = response.splitlines()  # Divide o texto em linhas
+    topicos = []
+    resumo = ''
+    for linha in linhas:
+        if "<topico>" in linha:
+          topicos.append(linha.replace('<topico>',''))
+        else:
+          resumo = resumo + linha.strip()  
 
-    print('\nComando enviado, aguarde alguns instantes...\n')
-    response = chat_session.send_message(f'Reponda a pergunta a seguir no idioma no qual foi perguntado - {message} - Responda a essa pergunta seguindo o contexto do PCP da WEG energia, preste atenção às informações no histórico de conversas. JAMAIS CITE A EXISTÊNCIA DO HISTÓRICO DE NOSSAS CONVERSAS;')
-    print(response.text)
+    return topicos, resumo
 
-print('FIM')
+if __name__ == "__main__":
+  ia = GeminiAI()
+  response = ia.send_message('Kanban diário de JGS')
