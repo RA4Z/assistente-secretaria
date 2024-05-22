@@ -6,9 +6,12 @@ import os
 config_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.append(config_dir)
 
+from gemini import GeminiAI
+
 class Graphic(ft.UserControl):
   def __init__(self):
     self.app_text = json.load(open(f'pages/text.json', 'r', encoding='utf-8'))
+    self.ia = GeminiAI()
     self.styles()
 
 
@@ -58,8 +61,12 @@ class Graphic(ft.UserControl):
   def send_command(self, e):
     if self.new_task.value != '':
       self.finish_button.visible = True
-      self.tasks_view.controls.append(ft.Checkbox(label=self.new_task.value))
-      self.indicador_atual.value = f"{self.app_text.get('procedure_description')} {self.new_task.value}:\nblablabla"
+      topicos, resumo = self.ia.send_message(self.new_task.value)
+
+      for topico in topicos:
+        self.tasks_view.controls.append(ft.Checkbox(label=topico))
+
+      self.indicador_atual.value = f"{self.app_text.get('procedure_description')} {self.new_task.value}:\n{resumo}"
       self.new_task.value = ""
       self.page.update()  # Atualiza a interface
 

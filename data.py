@@ -6,29 +6,29 @@ data = Dados()
 path_weekly = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Ester/Manual de Procedimentos/Indicadores Semanal'
 path_monthly = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Ester/Manual de Procedimentos/Indicadores Mensal'
 path_daily = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Ester/Manual de Procedimentos/Diário'
-path_procedures = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/general_procedures'
-path_rules = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/rules'
+# path_procedures = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/general_procedures'
+# path_rules = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/rules'
 
-agendaPCP = json.load(open('agenda.json', 'r', encoding='utf-8'))
+# agendaPCP = json.load(open('agenda.json', 'r', encoding='utf-8'))
 
-paths = [path_daily, path_weekly, path_monthly, path_procedures, path_rules]
+paths = [path_daily, path_weekly, path_monthly]
 historico = []
 
 #INSERIR INFORMAÇÕES DA AGENDA DO PCP, CRIADA PELA MARGUIT
-for seq in agendaPCP:
-    historico.append({
-        "role": "user",
-        "parts": [
-            f"Agenda PCP Sequência {seq['SEQ']}:"
-        ]
-    })
-    historico.append({
-        "role": "model",
-        "parts": [
-            f"\nSequência: {seq['SEQ']}\n{seq['REFERÊNCIA']}\nDescrição: {seq['DESCRIÇÃO']}\nUtilidade: {seq['UTILIDADE']}"+ 
-            (f"\nDetalhes: {seq['DETALHES']}" if 'DETALHES' in seq else "")
-        ]
-    })
+# for seq in agendaPCP:
+#     historico.append({
+#         "role": "user",
+#         "parts": [
+#             f"Agenda PCP Sequência {seq['SEQ']}:"
+#         ]
+#     })
+#     historico.append({
+#         "role": "model",
+#         "parts": [
+#             f"\nSequência: {seq['SEQ']}\n{seq['REFERÊNCIA']}\nDescrição: {seq['DESCRIÇÃO']}\nUtilidade: {seq['UTILIDADE']}"+ 
+#             (f"\nDetalhes: {seq['DETALHES']}" if 'DETALHES' in seq else "")
+#         ]
+#     })
 
 #INSERIR PROCEDIMENTOS E DOCUMENTOS WORD
 for path in paths:

@@ -52,8 +52,8 @@ class GeminiAI():
       Preste atenção às informações no histórico de conversas;
       JAMAIS CITE A EXISTÊNCIA DO HISTÓRICO DE NOSSAS CONVERSAS;
       Busque informações sobre o procedimento do indicador: {message};
-      Separe o procedimento retornado em vários tópicos, não fazendo uso de subtópicos, deve estar escrito <topico> na frente de cada tópico;
-      Crie um resumo sobre o indicador correspondente ao comando, usando seus conhecimentos prévios baseados em todos os procedimentos, informações da agenda PCP, normas, etc. auxilie com informações de melhores práticas, como otimizar o tempo, etc., também informe a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado;
+      Separe o passo a passo para atualizar o indicador em vários tópicos, não fazendo uso de subtópicos, deve estar escrito <topico> na frente de cada tópico;
+      Crie um resumo sobre o indicador correspondente ao comando, também informando a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado;
       
       Siga o padrão:
 
@@ -77,6 +77,8 @@ class GeminiAI():
 
     return topicos, resumo
 
+
 if __name__ == "__main__":
   ia = GeminiAI()
   response = ia.send_message('Kanban diário de JGS')
+
