@@ -1,4 +1,10 @@
 {
     "window_title": "Assistente de Secretária do PCP",
-    "main_title": "Seja bem-vinda(o) ao Assistente de Secretária do departamento PCP WEN! Consulte a documentação para visualizar como o sistema funciona, dúvidas ou sujestões favor alinhar com Robert Aron Zimmermann, robertn@weg.net"
+    "main_title": "Seja bem-vinda(o) ao Assistente de Secretária do departamento PCP WEN! Consulte a documentação para visualizar como o sistema funciona, dúvidas ou sujestões favor alinhar com Robert Aron Zimmermann, robertn@weg.net",
+
+    "procedure_description": "Procedimento detalhado para atualização de",
+    "finish_button": "Marcar Procedimento como concluído",
+    
+    "command_input": "Procurar por procedimento",
+    "command_send": "Buscar por Procedimento"
 }

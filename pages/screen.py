@@ -2,23 +2,71 @@ import flet as ft
 import json
 import sys
 import os
+
 config_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.append(config_dir)
 
-class Graphic():
+class Graphic(ft.UserControl):
   def __init__(self):
     self.app_text = json.load(open(f'pages/text.json', 'r', encoding='utf-8'))
+    self.styles()
 
 
   def main(self, page: ft.Page):
+    self.page = page  # Armazena a referência para a página
     page.title = self.app_text.get('window_title')
     page.add(
       ft.Text(self.app_text.get('main_title'), size=24, text_align=ft.TextAlign.CENTER),
-      ft.ElevatedButton(
-        text="Clique aqui",
-        on_click=lambda e: page.add(ft.Text("Você clicou no botão!", size=20))
-      ),
+      self.view,
     )
+    page.scroll = "always"
+    
+
+  def styles(self):
+    self.new_task = ft.TextField(hint_text=self.app_text.get('command_input'), expand=True)
+    self.indicador_atual = ft.Text("", size=15, text_align=ft.TextAlign.CENTER, expand=True)
+    self.tasks_view = ft.Column(width=800)
+
+    self.finish_button = ft.ElevatedButton(
+        text=self.app_text.get('finish_button'),
+        height=50,
+        on_click=lambda e: self.finish(e),
+        visible=False
+    )
+
+    self.view=ft.Column(
+      controls=[
+          ft.Row(
+              controls=[
+                  self.new_task,
+                  ft.ElevatedButton(
+                    text=self.app_text.get('command_send'),
+                    height=50,
+                    on_click=lambda e: self.send_command(e) 
+                  )
+              ],
+          ),
+          ft.Row(
+              controls=[self.indicador_atual,self.finish_button],
+              alignment=ft.MainAxisAlignment.CENTER,
+          ), 
+          self.tasks_view,
+      ],
+    )
+
+
+  def send_command(self, e):
+    if self.new_task.value != '':
+      self.finish_button.visible = True
+      self.tasks_view.controls.append(ft.Checkbox(label=self.new_task.value))
+      self.indicador_atual.value = f"{self.app_text.get('procedure_description')} {self.new_task.value}:\nblablabla"
+      self.new_task.value = ""
+      self.page.update()  # Atualiza a interface
+
+
+  def finish(self, e):
+    pass
+
 
 graphic = Graphic()
 
