@@ -80,5 +80,6 @@ class Graphic(ft.UserControl):
 
       self.page.update()
 
+
 if __name__ == "__main__":
   graphic = Graphic()
