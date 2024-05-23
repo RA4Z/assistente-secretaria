@@ -55,13 +55,15 @@ class GeminiAI():
       Separe o passo a passo para atualizar o indicador em vários tópicos, não fazendo uso de subtópicos, deve estar escrito <topico> na frente de cada tópico;
       Crie um resumo sobre o indicador correspondente ao comando, também informando a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado;
       
-      Siga o padrão:
-
+      Siga o modelo abaixo para o output:
       
-       <topico> Informações sobre o tópico 1;
-       <topico> Informações sobre o tópico 2;
-       <topico> Informações sobre o tópico 3;
-       <topico> Informações sobre o tópico 4;
+       <topico> Abra o arquivo localizado na pasta 'Q:/GROUPS/...';
+       <topico> Abra o SAP;
+       <topico> Acesse a transação ...;
+       <topico> Insira a variante ...;
+       <topico> Executar a transação;
+       <topico> Copiar materiais e inserir no arquivo ...;
+
        Resumo do indicador...
 
     """
@@ -80,5 +82,5 @@ class GeminiAI():
 
 if __name__ == "__main__":
   ia = GeminiAI()
-  response = ia.send_message('Kanban diário de JGS')
-
+  topicos, resumo = ia.send_message('Kanban diário de JGS')
+  print(topicos, resumo)
