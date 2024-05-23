@@ -62,6 +62,7 @@ class Graphic(ft.UserControl):
     if self.new_task.value != '':
       self.finish_button.visible = True
       topicos, resumo = self.ia.send_message(self.new_task.value)
+      self.tasks_view.controls.clear() 
 
       for topico in topicos:
         self.tasks_view.controls.append(ft.Checkbox(label=topico))

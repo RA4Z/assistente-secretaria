@@ -1,6 +1,11 @@
 from extract import Dados
+from rotinas import *
 import json
 import os
+
+diarios()
+semanais()
+mensais()
 
 data = Dados()
 path_weekly = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Ester/Manual de Procedimentos/Indicadores Semanal'

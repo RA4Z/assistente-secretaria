@@ -34,7 +34,3 @@ def mensais():
         else:
             indicador['Status'] = "Pendente"
     json.dump(indicadores, open('data/mensais.json', 'w', encoding='utf-8'), indent=4)
-
-
-diarios()
-
