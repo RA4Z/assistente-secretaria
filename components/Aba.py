@@ -37,7 +37,7 @@ class Aba(ft.UserControl):
                             text='Indicadores Mensais',
                             height=50,
                             on_click=lambda e: self.select_tab('mensais',e)
-                        )
+                        ),
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
                 ),

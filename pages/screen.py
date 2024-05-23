@@ -35,11 +35,7 @@ class Graphic(ft.UserControl):
           self.tabs.components()
         ],
       ),
-      ft.Row(
-        controls=[
-          self.indicador.view
-        ]
-      ),
+      self.indicador.view
     )
     page.scroll = "always"
     
@@ -51,7 +47,14 @@ class Graphic(ft.UserControl):
     self.indicador.tasks_view.controls.clear() 
 
     for topico in topicos:
-        self.indicador.tasks_view.controls.append(ft.Checkbox(label=topico))
+        self.indicador.tasks_view.controls.append(
+          ft.Row(
+              controls=[
+                  ft.Checkbox(),
+                  ft.Text(topico,size=15,text_align=ft.TextAlign.LEFT,expand=True),
+              ],
+          )
+        )
 
     self.indicador.indicador_atual.value = f"{self.app_text.get('procedure_description')} {prompt}:\n{resumo}"
     self.page.update()  # Atualiza a interface

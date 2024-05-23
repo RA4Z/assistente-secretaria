@@ -8,19 +8,13 @@
     {
         "Name": "Kanban Di\u00e1rio SBC",
         "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Acompanhamento Diario Kanbam/acompanhamento_diario_1201.xlsm",
-        "LastUpdate": "2024-05-23",
-        "Status": "Realizado"
-    },
-    {
-        "Name": "Apontamento Automatizado",
-        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Processos com Automatiza\u00e7\u00e3o/34 - Apontamento automatizado/Apontamento_automatizado_de_ordens.xlsm",
         "LastUpdate": "2024-05-22",
         "Status": "Pendente"
     },
     {
         "Name": "Lista de Materiais Pendentes",
         "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Processos com Automatiza\u00e7\u00e3o/04 - Situa\u00e7\u00e3o Comprados/Lista_de_Materiais_Pendentes.xlsm",
-        "LastUpdate": "2024-05-23",
-        "Status": "Realizado"
+        "LastUpdate": "2024-05-22",
+        "Status": "Pendente"
     }
 ]

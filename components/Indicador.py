@@ -14,17 +14,18 @@ class Indicador(ft.UserControl):
         self.styles()
     
     def styles(self):
-        self.indicador_atual = ft.Text("", size=15, text_align=ft.TextAlign.CENTER, width=self.page.window_width - 400)
-        self.tasks_view = ft.Column(width=800)
+        self.indicador_atual = ft.Text("", size=15, text_align=ft.TextAlign.CENTER, expand=True)
+        self.tasks_view = ft.Column()
 
         self.finish_button = ft.ElevatedButton(
             text=self.app_text.get('finish_button'),
             height=50,
+            width=300,
             on_click=lambda e: self.on_click(e),
             visible=False
         )
 
-        self.view=ft.Column(
+        self.view= ft.Column(
             controls=[
                 ft.Row(
                     controls=[self.indicador_atual,self.finish_button],
