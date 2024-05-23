@@ -10,8 +10,8 @@ sys.path.append(config_dir)
 class Aba(ft.UserControl):
     def __init__(self, page: ft.Page):
         self.page = page
-        self.indicador_atual = ft.Text("Texto topzera", size=15, text_align=ft.TextAlign.CENTER)
-        self.indicadores = []
+        self.indicador_atual = ft.Text("", size=20, text_align=ft.TextAlign.CENTER, width=350)
+        self.indicadores = ft.Row(wrap=True, width= self.page.window_width - 350)
         self.components()
 
     def components(self):
@@ -37,8 +37,11 @@ class Aba(ft.UserControl):
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
                 ),
-                ft.Row(
-                    controls=[self.indicador_atual],
+                ft.Container(
+                    height=50
+                ),
+                ft.Row (
+                    controls=[self.indicador_atual, self.indicadores],
                     alignment=ft.MainAxisAlignment.CENTER,
                 )
             ]
@@ -48,10 +51,18 @@ class Aba(ft.UserControl):
     def select_tab(self, selected:str, e):
         self.indicador_atual.value = f'Visualizando indicadores {selected}'
         indicadores = json.load(open(f'data/{selected}.json', 'r', encoding='utf-8'))
-        
-        self.indicadores.clear()
+        self.indicadores.controls.clear()
         for indicador in indicadores:
-            self.indicadores.append(indicador['Name'])
-
-        print(self.indicadores)
+            if indicador['Status'] == 'Pendente':
+                cor = '#F9EC9B'
+            else:
+                cor = '#BDECB6'
+            
+            self.indicadores.controls.append(
+                ft.ElevatedButton(
+                    text=indicador['Name'],
+                    height=50,
+                    bgcolor=cor
+                ),
+            )
         self.page.update()

@@ -16,13 +16,15 @@ class Graphic(ft.UserControl):
     self.styles()
     ft.app(target=self.main)
 
-
   def main(self, page: ft.Page):
     self.page = page  # Armazena a referência para a página
     page.title = self.app_text.get('window_title')
 
     page.add(
       ft.Text(self.app_text.get('main_title'), size=24, text_align=ft.TextAlign.CENTER),
+      ft.Container(
+          height=15
+      ),
       ft.Row(
           controls=[
               Aba(page).components()
