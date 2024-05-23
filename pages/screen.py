@@ -2,7 +2,8 @@ import flet as ft
 import json
 import sys
 import os
-
+from datetime import date
+  
 config_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.append(config_dir)
 
@@ -16,26 +17,28 @@ class Graphic(ft.UserControl):
     self.ia = GeminiAI()
     ft.app(target=self.main)
 
+
   def main(self, page: ft.Page):
     self.page = page  # Armazena a referência para a página
     page.title = self.app_text.get('window_title')
+    self.indicador_atual = ''
     self.tabs = Aba(page, self.send_command)
-    self.indicador = Indicador(page)
+    self.indicador = Indicador(page, self.finish)
 
     page.add(
       ft.Text(self.app_text.get('main_title'), size=24, text_align=ft.TextAlign.CENTER),
       ft.Container(
-          height=15
+        height=15
       ),
       ft.Row(
-          controls=[
-            self.tabs.components()
-          ],
+        controls=[
+          self.tabs.components()
+        ],
       ),
       ft.Row(
-          controls=[
-            self.indicador.view
-          ]
+        controls=[
+          self.indicador.view
+        ]
       ),
     )
     page.scroll = "always"
@@ -43,6 +46,7 @@ class Graphic(ft.UserControl):
     
   def send_command(self, prompt:str, e):
     self.indicador.finish_button.visible = True
+    self.indicador_atual = prompt
     topicos, resumo = self.ia.send_message(prompt)
     self.indicador.tasks_view.controls.clear() 
 
@@ -54,8 +58,27 @@ class Graphic(ft.UserControl):
 
 
   def finish(self, e):
-      pass
+    if self.indicador_atual != '':
+      indicadores = json.load(open(f'data/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
+      for indicador in indicadores:
+        if indicador['Name'] == self.indicador_atual:
+          indicador['Status'] = 'Realizado'
+          indicador['LastUpdate'] = str(date.today())
+      json.dump(indicadores, open(f'data/{self.tabs.tab_selecionada}.json', 'w', encoding='utf-8'), indent=4)
 
+      self.tabs.indicadores.controls.clear()
+      indicadores = json.load(open(f'data/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
+      for indicador in indicadores:
+        if indicador['Status'] == 'Pendente':
+            cor = '#F9EC9B'
+        else:
+            cor = '#BDECB6'
+            
+        self.tabs.indicadores.controls.append(
+            self.tabs.criar_botao(indicador['Name'], cor)
+        )
+
+      self.page.update()
 
 if __name__ == "__main__":
   graphic = Graphic()

@@ -12,9 +12,11 @@ class Aba(ft.UserControl):
         self.page = page
         self.on_click = on_click
         self.prompt = ''
+        self.tab_selecionada = ''
         self.indicador_atual = ft.Text("", size=20, text_align=ft.TextAlign.CENTER, width=350)
         self.indicadores = ft.Row(wrap=True, width= self.page.window_width - 350)
         self.components()
+
 
     def components(self):
         return ft.Column(
@@ -40,18 +42,22 @@ class Aba(ft.UserControl):
                     alignment=ft.MainAxisAlignment.CENTER
                 ),
                 ft.Container(
-                    height=50
+                    height=25
                 ),
                 ft.Row (
                     controls=[self.indicador_atual, self.indicadores],
                     alignment=ft.MainAxisAlignment.CENTER,
-                )
+                ),
+                ft.Container(
+                    height=25
+                ),
             ]
         )
   
 
     def select_tab(self, selected:str, e):
         self.indicador_atual.value = f'Visualizando indicadores {selected}'
+        self.tab_selecionada = selected
         indicadores = json.load(open(f'data/{selected}.json', 'r', encoding='utf-8'))
         self.indicadores.controls.clear()
         for indicador in indicadores:
@@ -59,16 +65,23 @@ class Aba(ft.UserControl):
                 cor = '#F9EC9B'
             else:
                 cor = '#BDECB6'
-            
+                
             self.indicadores.controls.append(
-                ft.ElevatedButton(
-                    text=indicador['Name'],
-                    height=50,
-                    bgcolor=cor,
-                    on_click=lambda e: self.on_click(indicador['Name'], e)
-                ),
+                self.criar_botao(indicador['Name'], cor)
             )
+
         self.page.update()
+
+
+    def criar_botao(self, nome_indicador, cor):
+        def on_click(e):
+            self.on_click(nome_indicador, e)
+        return ft.ElevatedButton(
+            text=nome_indicador,
+            height=50,
+            bgcolor=cor,
+            on_click=on_click
+        )
 
     def pesquisar_indicador(self, indicador:str, e):
         self.prompt = indicador
