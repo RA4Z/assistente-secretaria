@@ -8,8 +8,10 @@ sys.path.append(config_dir)
 
 
 class Aba(ft.UserControl):
-    def __init__(self, page: ft.Page):
+    def __init__(self, page: ft.Page, on_click):
         self.page = page
+        self.on_click = on_click
+        self.prompt = ''
         self.indicador_atual = ft.Text("", size=20, text_align=ft.TextAlign.CENTER, width=350)
         self.indicadores = ft.Row(wrap=True, width= self.page.window_width - 350)
         self.components()
@@ -62,7 +64,12 @@ class Aba(ft.UserControl):
                 ft.ElevatedButton(
                     text=indicador['Name'],
                     height=50,
-                    bgcolor=cor
+                    bgcolor=cor,
+                    on_click=lambda e: self.on_click(indicador['Name'], e)
                 ),
             )
         self.page.update()
+
+    def pesquisar_indicador(self, indicador:str, e):
+        self.prompt = indicador
+    
