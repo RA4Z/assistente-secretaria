@@ -26,7 +26,7 @@ class Graphic(ft.UserControl):
     self.indicador = Indicador(page, self.finish)
 
     page.add(
-      ft.Text(self.app_text.get('main_title'), size=24, text_align=ft.TextAlign.CENTER),
+      ft.Text(self.app_text.get('main_title'), size=24, text_align=ft.TextAlign.CENTER, weight='bold'),
       ft.Container(
         height=15
       ),
