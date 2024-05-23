@@ -13,13 +13,14 @@ class Aba(ft.UserControl):
         self.on_click = on_click
         self.prompt = ''
         self.tab_selecionada = ''
-        self.indicador_atual = ft.Text("", size=20, text_align=ft.TextAlign.CENTER, width=350)
-        self.indicadores = ft.Row(wrap=True, width= self.page.window_width - 350)
+        self.indicador_atual = ft.Text("", size=20, text_align=ft.TextAlign.CENTER)
+        self.indicadores = ft.Row(wrap=True)
         self.components()
 
 
     def components(self):
         return ft.Column(
+            expand=True,
             controls=[
                 ft.Row(
                     controls=[
@@ -39,15 +40,17 @@ class Aba(ft.UserControl):
                             on_click=lambda e: self.select_tab('mensais',e)
                         ),
                     ],
-                    alignment=ft.MainAxisAlignment.CENTER
+                    alignment=ft.MainAxisAlignment.CENTER,
                 ),
                 ft.Container(
                     height=25
                 ),
-                ft.Row (
-                    controls=[self.indicador_atual, self.indicadores],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
+                self.indicador_atual,
+                self.indicadores,
+                # ft.Column (
+                #     controls=[self.indicador_atual, self.indicadores],
+                #     alignment=ft.MainAxisAlignment.CENTER,
+                # ),
                 ft.Container(
                     height=25
                 ),
