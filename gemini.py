@@ -1,5 +1,6 @@
 import google.generativeai as genai
 from data import historico
+from datetime import date
 import os
 
 genai.configure(api_key=os.environ['GEMINI_API_KEY'])
@@ -52,6 +53,7 @@ class GeminiAI():
       Preste atenção às informações no histórico de conversas;
       JAMAIS CITE A EXISTÊNCIA DO HISTÓRICO DE NOSSAS CONVERSAS;
       Busque informações sobre o procedimento do indicador: {message};
+      Quando aparecer escrito ANO_ATUAL, subtitua por {date.today().year}, quando aparecer MES_ATUAL, substitua por {date.today().month:02}, quando aparecer SEMANA_ATUAL, substitua por {date.today().isocalendar().week};
       Separe o passo a passo para atualizar o indicador em vários tópicos, não fazendo uso de subtópicos, deve estar escrito <topico> na frente de cada tópico;
       Crie um resumo sobre o indicador correspondente ao comando, também informando a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado;
       
