@@ -16,6 +16,7 @@ class Graphic(ft.UserControl):
     self.app_text = json.load(open(f'pages/text.json', 'r', encoding='utf-8'))
     self.ia = GeminiAI()
     self.logotipo = ft.Image(src="images/logo.png")
+    self.loading = ft.Image(src="images/loading.gif", width=75, visible=False)
     ft.app(target=self.main)
 
 
@@ -42,12 +43,17 @@ class Graphic(ft.UserControl):
           self.tabs.components()
         ],
       ),
+      # Animação de Carregamento
+      self.loading,
       self.indicador.view
     )
     page.scroll = "always"
     
     
   def send_command(self, prompt:str, e):
+    # Mostra a animação de carregamento
+    self.loading.visible = True
+    self.page.update()
     self.indicador.finish_button.visible = True
     self.indicador_atual = prompt
     topicos, resumo = self.ia.send_message(prompt)
@@ -64,6 +70,7 @@ class Graphic(ft.UserControl):
         )
 
     self.indicador.indicador_atual.value = f"{self.app_text.get('procedure_description')} {prompt}:\n{resumo}"
+    self.loading.visible = False
     self.page.update()  # Atualiza a interface
 
 
