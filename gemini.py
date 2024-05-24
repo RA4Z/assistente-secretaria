@@ -58,6 +58,7 @@ class GeminiAI():
       Formate as datas de 'LastUpdate' dos indicadores em formato de 'dd/mm/yyyy', mantendo a data que se encontra na base de dados.
       Separe o passo a passo para atualizar o indicador em vários tópicos, não fazendo uso de subtópicos, deve estar escrito <topico> na frente de cada tópico;
       Crie um resumo sobre o indicador correspondente ao comando, também informando a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado, além disso mostre o caminho do documento word com o respectivo procedimento;
+      se baseie somente nos dados do documento word com o respectivo procedimento para entregar o resultado.
       
       Siga o modelo abaixo para o output:
       

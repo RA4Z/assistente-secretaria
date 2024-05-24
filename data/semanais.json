@@ -1,21 +1,21 @@
 [
     {
         "Name": "CRP WEM",
-        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/CRP EM/",
+        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/CRP EM",
         "PathProcedure": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/weekly/CRP WEM.docx",
         "LastUpdate": "2024-05-16",
         "Status": "Pendente"
     },
     {
         "Name": "CRP WII",
-        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/CRP WII/",
+        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/CRP WII",
         "PathProcedure": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/weekly/CRP WII.docx",
         "LastUpdate": "2024-05-16",
         "Status": "Pendente"
     },
     {
         "Name": "CRP JGS",
-        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/Indicadores Automatizados (Valmir)/NOVO CRP/NOVO_CRP/",
+        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/Indicadores Automatizados (Valmir)/NOVO CRP/NOVO_CRP",
         "PathProcedure": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/weekly/CRP JGS.docx",
         "LastUpdate": "2024-05-24",
         "Status": "Realizado"
