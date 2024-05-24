@@ -20,7 +20,7 @@ class Aba(ft.UserControl):
 
 
     def components(self):
-        return ft.Column(
+        self.content = ft.Column(
             expand=True,
             controls=[
                 ft.Row(
@@ -57,6 +57,7 @@ class Aba(ft.UserControl):
                 ),
             ]
         )
+        return self.content
   
 
     def select_tab(self, selected:str, e):
@@ -74,6 +75,7 @@ class Aba(ft.UserControl):
                 self.criar_botao(indicador['Name'], cor)
             )
 
+        self.alterar_borda(selected)
         self.clean_data()
         self.page.update()
 
@@ -91,3 +93,16 @@ class Aba(ft.UserControl):
     def pesquisar_indicador(self, indicador:str, e):
         self.prompt = indicador
     
+
+    def alterar_borda(self, tab_name:str):
+        for child in self.content.controls[0].controls:
+            if isinstance(child, ft.ElevatedButton):
+                child.bgcolor='#f0f4fa'
+                if tab_name == 'diarios':
+                    self.content.controls[0].controls[0].bgcolor='#c7d6ed'
+                elif tab_name == 'semanais':
+                    self.content.controls[0].controls[1].bgcolor='#c7d6ed'
+                elif tab_name == 'mensais':
+                    self.content.controls[0].controls[2].bgcolor='#c7d6ed'
+
+        self.page.update()
