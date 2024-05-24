@@ -8,9 +8,10 @@ sys.path.append(config_dir)
 
 
 class Aba(ft.UserControl):
-    def __init__(self, page: ft.Page, on_click):
+    def __init__(self, page: ft.Page, on_click, clean_data):
         self.page = page
         self.on_click = on_click
+        self.clean_data = clean_data
         self.prompt = ''
         self.tab_selecionada = ''
         self.indicador_atual = ft.Text("", size=20, text_align=ft.TextAlign.CENTER)
@@ -73,6 +74,7 @@ class Aba(ft.UserControl):
                 self.criar_botao(indicador['Name'], cor)
             )
 
+        self.clean_data()
         self.page.update()
 
 

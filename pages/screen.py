@@ -22,7 +22,7 @@ class Graphic(ft.UserControl):
     self.page = page  # Armazena a referência para a página
     page.title = self.app_text.get('window_title')
     self.indicador_atual = ''
-    self.tabs = Aba(page, self.send_command)
+    self.tabs = Aba(page, self.send_command, self.clean_data)
     self.indicador = Indicador(page, self.finish)
 
     page.add(
@@ -59,6 +59,12 @@ class Graphic(ft.UserControl):
     self.indicador.indicador_atual.value = f"{self.app_text.get('procedure_description')} {prompt}:\n{resumo}"
     self.page.update()  # Atualiza a interface
 
+  #TERMINAR LIMPEZA!!!!
+  def clean_data(self):
+    self.indicador.tasks_view.controls.clear() 
+    self.indicador.finish_button.visible = False
+    self.indicador.indicador_atual.value = ""
+    self.page.update()  # Atualiza a interface
 
   def finish(self, e):
     if self.indicador_atual != '':
