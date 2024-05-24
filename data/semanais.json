@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "Name": "CRP WEM",
+        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/CRP EM/CRP EM.xlsm",
+        "LastUpdate": "2024-05-16",
+        "Status": "Pendente"
+    },
+    {
+        "Name": "CRP WII",
+        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/CRP WII/CRP WII.xlsm",
+        "LastUpdate": "2024-05-16",
+        "Status": "Pendente"
+    },
+    {
+        "Name": "CRP JGS",
+        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Indicadores Automatizados/Indicadores Automatizados (Valmir)/NOVO CRP/NOVO_CRP/CRP_WEN_vers\u00e3o PUBLICADA.pbix",
+        "LastUpdate": "2024-05-24",
+        "Status": "Realizado"
+    },
+    {
+        "Name": "Prazos para Controle",
+        "Path": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Processos com Automatiza\u00e7\u00e3o/A033 - Prazos para controle PCP/Prazos_Montagem.xlsm",
+        "LastUpdate": "2024-05-16",
+        "Status": "Pendente"
+    }
+]

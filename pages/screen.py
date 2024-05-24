@@ -15,6 +15,7 @@ class Graphic(ft.UserControl):
   def __init__(self):
     self.app_text = json.load(open(f'pages/text.json', 'r', encoding='utf-8'))
     self.ia = GeminiAI()
+    self.logotipo = ft.Image(src="images/logo.png")
     ft.app(target=self.main)
 
 
@@ -26,7 +27,13 @@ class Graphic(ft.UserControl):
     self.indicador = Indicador(page, self.finish)
 
     page.add(
-      ft.Text(self.app_text.get('main_title'), size=24, text_align=ft.TextAlign.CENTER, weight='bold'),
+      ft.Row(
+        controls=[
+          self.logotipo,
+          ft.Text(self.app_text.get('main_title'), size=24, text_align=ft.TextAlign.CENTER, weight='bold', expand=True),
+        ],
+      ),
+
       ft.Container(
         height=15
       ),
@@ -59,12 +66,14 @@ class Graphic(ft.UserControl):
     self.indicador.indicador_atual.value = f"{self.app_text.get('procedure_description')} {prompt}:\n{resumo}"
     self.page.update()  # Atualiza a interface
 
+
   #TERMINAR LIMPEZA!!!!
   def clean_data(self):
     self.indicador.tasks_view.controls.clear() 
     self.indicador.finish_button.visible = False
     self.indicador.indicador_atual.value = ""
     self.page.update()  # Atualiza a interface
+
 
   def finish(self, e):
     if self.indicador_atual != '':
