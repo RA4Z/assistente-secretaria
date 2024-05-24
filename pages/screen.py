@@ -44,7 +44,12 @@ class Graphic(ft.UserControl):
         ],
       ),
       # Animação de Carregamento
-      self.loading,
+      ft.Row(
+        alignment=ft.MainAxisAlignment.CENTER,
+        controls=[
+          self.loading
+        ]
+      ),
       self.indicador.view
     )
     page.scroll = "always"
@@ -52,6 +57,7 @@ class Graphic(ft.UserControl):
     
   def send_command(self, prompt:str, e):
     # Mostra a animação de carregamento
+    self.clean_data()
     self.loading.visible = True
     self.page.update()
     self.indicador.finish_button.visible = True
