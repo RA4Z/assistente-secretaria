@@ -5,5 +5,12 @@
         "PathProcedure": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/monthly/Planejado x Realizado.docx",
         "LastUpdate": "2024-05-07",
         "Status": "Realizado"
+    },
+    {
+        "Name": "Aniversariantes do M\u00eas",
+        "Path": "https://intranet.weg.net/br/energia-wm/pcp/Aniversariantes/Forms/AllItems.aspx?View=%7B94442569%2DF764%2D4662%2DBF44%2D7C0E1733E975%7D&InitialTabId=Ribbon%2EDocument&VisibilityContext=WSSTabPersistence",
+        "PathProcedure": "Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/monthly/Aniversariantes do M\u00eas.docx",
+        "LastUpdate": "2024-05-07",
+        "Status": "Realizado"
     }
 ]
