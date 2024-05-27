@@ -55,12 +55,14 @@ class GeminiAI():
       JAMAIS CITE A EXISTÊNCIA DO HISTÓRICO DE NOSSAS CONVERSAS;
       Busque informações sobre o procedimento do indicador: {message};
       Quando aparecer escrito o texto "ANO_ATUAL", substitua por {date.today().year}, quando aparecer escrito o texto "MES_ATUAL", substitua por {date.today().month:02}, quando aparecer escrito o texto "SEMANA_ATUAL", substitua por {date.today().isocalendar().week}, quando aparecer escrito o texto "ULTIMO_DIA_UTIL", substitua por {ultimo_dia_util(date.today())}, quando aparecer escrito o texto "DIA_ATUAL", substitua por {date.today().day:02}
+      Quando aparecer escrito o texto "SEM_PASSADO", substitua por {str(int(date.today().strftime('%m'))-1).zfill(2)};
       Formate as datas de 'LastUpdate' dos indicadores em formato de 'dd/mm/yyyy', mantendo a data que se encontra na base de dados.
       Separe o passo a passo para atualizar o indicador em vários tópicos, não fazendo uso de subtópicos, deve estar escrito <topico> na frente de cada tópico;
       Crie um resumo sobre o indicador correspondente ao comando, também informando a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado, além disso mostre o caminho do documento word com o respectivo procedimento;
       se baseie nos dados do documento word com o procedimento do indicador {message} para entregar o resultado.
-      
-      Siga o modelo abaixo para o output (SE NÃO ENCONTRAR DADOS, ENTÃO ):
+
+      CASO O INDICADOR {message} NÃO EXISTA, ENTÃO NO RESUMO DIGA QUE O INDICADOR NÃO FOI ENCONTRADO E ENTREGUE UM TÓPICO ESCRITO "Error 404";
+      Siga o modelo abaixo para o output CASO O INDICADOR EXISTA:
       
        <topico> Abra o arquivo localizado na pasta 'Q:/GROUPS/...';
        <topico> Abra o SAP;
@@ -71,7 +73,7 @@ class GeminiAI():
 
        Resumo do indicador...
 
-    """ #PLANEJADO VS REALIZADO ESTÁ ESTRAGADO!
+    """
     response = self.chat_session.send_message(message).text
     linhas = response.splitlines()  # Divide o texto em linhas
     topicos = []
@@ -87,7 +89,7 @@ class GeminiAI():
 
 if __name__ == "__main__":
   ia = GeminiAI()
-  topicos, resumo = ia.send_message('Indicador Mensal - Planejado x Realizado')
+  topicos, resumo = ia.send_message('Kanban Diário')
   
   for topico in topicos:
     print(topico)
