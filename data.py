@@ -9,7 +9,7 @@ mensais()
 
 data = Dados()
 path_weekly = 'Q:\GROUPS\BR_SC_JGS_WM_LOGISTICA\PCP\PPC_AI_Procedures\ppc_secretary\weekly'
-path_monthly = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/Ester/Manual de Procedimentos/Indicadores Mensal'
+path_monthly = 'Q:\GROUPS\BR_SC_JGS_WM_LOGISTICA\PCP\PPC_AI_Procedures\ppc_secretary\monthly'
 path_daily = 'Q:\GROUPS\BR_SC_JGS_WM_LOGISTICA\PCP\PPC_AI_Procedures\ppc_secretary\daily'
 # path_procedures = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/general_procedures'
 # path_rules = 'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/rules'
