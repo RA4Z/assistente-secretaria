@@ -10,6 +10,7 @@ config_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.append(config_dir)
 
 from gemini import GeminiAI
+from rotinas import run_all
 from components.Aba import Aba
 from components.Indicador import Indicador
 
@@ -63,7 +64,12 @@ class Graphic(ft.UserControl):
     self.clean_data()
     self.loading.visible = True
     self.page.update()
-    self.indicador.finish_button.visible = True
+
+    indicadores = json.load(open(f'data/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
+    for indicador in indicadores:
+      if indicador['Name'] == prompt and indicador['Status'] != 'Realizado':
+        self.indicador.finish_button.visible = True
+
     self.indicador_atual = prompt
     topicos, resumo = self.ia.send_message(prompt)
     self.indicador.tasks_view.controls.clear() 
@@ -135,6 +141,7 @@ class Graphic(ft.UserControl):
 
   #TERMINAR LIMPEZA!!!!
   def clean_data(self):
+    run_all()
     self.indicador.tasks_view.controls.clear() 
     self.indicador.finish_button.visible = False
     self.indicador.indicador_atual.value = ""
@@ -162,6 +169,7 @@ class Graphic(ft.UserControl):
             self.tabs.criar_botao(indicador['Name'], cor)
         )
 
+      self.indicador.finish_button.visible = False
       self.page.update()
 
 
