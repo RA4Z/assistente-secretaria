@@ -3,7 +3,9 @@ import json
 import sys
 import os
 from datetime import date
-  
+import pyperclip
+import re
+
 config_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.append(config_dir)
 
@@ -66,19 +68,52 @@ class Graphic(ft.UserControl):
     self.indicador.tasks_view.controls.clear() 
 
     for topico in topicos:
-        self.indicador.tasks_view.controls.append(
-          ft.Row(
+        if re.search(r'https?://(?:www\.)?[\w\d\-.]+\.[\w]{2,6}(?:/[\w\d\.\/\-_%&?=\+]+)?', topico) or re.search(r'[A-Za-z]:(?:\\|/)(?:[^\\/]+(?:\\|/))*[^\\/]+', topico)  or re.search(r'[\w\.-]+@[\w\.-]+\.\w+', topico):
+          def copy_topico(e, texto=topico):
+              links = re.findall(r'https?://(?:www\.)?[\w\d\-.]+\.[\w]{2,6}(?:/[\w\d\.\/\-_%&?=\+]+)?', texto)
+              pastas = re.findall(r'[A-Za-z]:(?:\\|/)(?:[^\\/]+(?:\\|/))*[^\\/]+', texto)
+              emails = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', texto)
+
+              if links:
+                  pyperclip.copy(links[0])
+                  print(f"Link web copiado!")
+
+              elif pastas:
+                  pyperclip.copy(pastas[0])
+                  print(f"Caminho de rede copiado!")
+
+              elif emails:
+                todos = ''
+                for email in emails:
+                  todos = f'{todos} {email};'
+
+                pyperclip.copy(todos.strip())
+                print(f"E-mails copiados!")
+
+          row = ft.Row(
               controls=[
                   ft.Checkbox(),
                   ft.Text(topico,size=15,text_align=ft.TextAlign.LEFT,expand=True),
+                  ft.ElevatedButton(
+                      text="Copiar", 
+                      on_click=copy_topico  # Adiciona evento de clique
+                  )
               ],
           )
-        )
+        else:
+            # Se não é um link, cria a linha sem o botão
+            row = ft.Row(
+                controls=[
+                    ft.Checkbox(),
+                    ft.Text(topico, size=15, text_align=ft.TextAlign.LEFT, expand=True)
+                ]
+            )
+
+        self.indicador.tasks_view.controls.append(row)
 
     self.indicador.indicador_atual.value = f"{self.app_text.get('procedure_description')} {prompt}:\n{resumo}"
     self.loading.visible = False
     self.page.update()  # Atualiza a interface
-
 
   #TERMINAR LIMPEZA!!!!
   def clean_data(self):
