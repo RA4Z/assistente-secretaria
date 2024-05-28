@@ -64,12 +64,12 @@ class GeminiAI():
       CASO O INDICADOR {message} NÃO EXISTA, ENTÃO NO RESUMO DIGA QUE O INDICADOR NÃO FOI ENCONTRADO E ENTREGUE UM TÓPICO ESCRITO "Error 404";
       Siga o modelo abaixo para o output CASO O INDICADOR EXISTA:
       
-       <topico> Abra o arquivo localizado na pasta 'Q:/GROUPS/...';
-       <topico> Abra o SAP;
-       <topico> Acesse a transação ...;
-       <topico> Insira a variante ...;
-       <topico> Executar a transação;
-       <topico> Copiar materiais e inserir no arquivo ...;
+       <topico> Abra o arquivo localizado na pasta Q:/GROUPS/...
+       <topico> Abra o SAP
+       <topico> Acesse a transação ...
+       <topico> Insira a variante ...
+       <topico> Executar a transação
+       <topico> Copiar materiais e inserir no arquivo ...
 
        Resumo do indicador...
 

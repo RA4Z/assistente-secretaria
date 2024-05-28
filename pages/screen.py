@@ -19,7 +19,6 @@ class Graphic(ft.UserControl):
     self.app_text = json.load(open(f'pages/text.json', 'r', encoding='utf-8'))
     self.ia = GeminiAI()
     self.logotipo = ft.Image(src="images/logo.png")
-    self.button_img = ft.Image(src="images/copiar-arquivo.png", width=40)
     self.loading = ft.Image(src="images/loading.gif", width=75, visible=False)
     ft.app(target=self.main)
 
@@ -80,15 +79,20 @@ class Graphic(ft.UserControl):
           pastas = re.findall(r'[A-Za-z]:(?:\\|/)(?:[^\\/]+(?:\\|/))*[^\\/]+', topico)
           emails = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', topico)
           found = ''
+          self.button_img = ft.Image(src="images/copiar-arquivo.png", width=40)
+
           if links:
-            found = 'Link da Web'
+            found = 'Copiar Link da Web'
+
           elif pastas:
-            found = 'Pasta da Rede'
+            found = 'Abrir Arquivo da Rede'
+            self.button_img = ft.Image(src="images/abrir.png", width=40)
+
           elif emails:
             if len(emails) > 1:
-              found = 'Endereços de E-mail'
+              found = 'Copiar Endereços de E-mail'
             else:
-              found = 'Endereço de E-mail'
+              found = 'Copiar Endereço de E-mail'
              
           def copy_topico(e, texto=topico):
               links = re.findall(r'https?://(?:www\.)?[\w\d\-.]+\.[\w]{2,6}(?:/[\w\d\.\/\-_%&?=\+]+)?', texto)
@@ -99,6 +103,7 @@ class Graphic(ft.UserControl):
                   pyperclip.copy(links[0])
 
               elif pastas:
+                  os.startfile(pastas[0])
                   pyperclip.copy(pastas[0])
 
               elif emails:
@@ -120,7 +125,7 @@ class Graphic(ft.UserControl):
                         elevation=0,                # Remove a sombra
                         bgcolor=ft.colors.TRANSPARENT,   # Define o fundo como transparente
                     ),
-                    tooltip=f"Copiar {found}"  # Definir o texto do tooltip
+                    tooltip=f"{found}"  # Definir o texto do tooltip
                   )
               ],
           )
