@@ -18,6 +18,7 @@ class Graphic(ft.UserControl):
     self.app_text = json.load(open(f'pages/text.json', 'r', encoding='utf-8'))
     self.ia = GeminiAI()
     self.logotipo = ft.Image(src="images/logo.png")
+    self.button_img = ft.Image(src="images/copiar-arquivo.png", width=40)
     self.loading = ft.Image(src="images/loading.gif", width=75, visible=False)
     ft.app(target=self.main)
 
@@ -69,6 +70,20 @@ class Graphic(ft.UserControl):
 
     for topico in topicos:
         if re.search(r'https?://(?:www\.)?[\w\d\-.]+\.[\w]{2,6}(?:/[\w\d\.\/\-_%&?=\+]+)?', topico) or re.search(r'[A-Za-z]:(?:\\|/)(?:[^\\/]+(?:\\|/))*[^\\/]+', topico)  or re.search(r'[\w\.-]+@[\w\.-]+\.\w+', topico):
+          links = re.findall(r'https?://(?:www\.)?[\w\d\-.]+\.[\w]{2,6}(?:/[\w\d\.\/\-_%&?=\+]+)?', topico)
+          pastas = re.findall(r'[A-Za-z]:(?:\\|/)(?:[^\\/]+(?:\\|/))*[^\\/]+', topico)
+          emails = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', topico)
+          found = ''
+          if links:
+            found = 'Link da Web'
+          elif pastas:
+            found = 'Pasta da Rede'
+          elif emails:
+            if len(emails) > 1:
+              found = 'Endereços de E-mail'
+            else:
+              found = 'Endereço de E-mail'
+             
           def copy_topico(e, texto=topico):
               links = re.findall(r'https?://(?:www\.)?[\w\d\-.]+\.[\w]{2,6}(?:/[\w\d\.\/\-_%&?=\+]+)?', texto)
               pastas = re.findall(r'[A-Za-z]:(?:\\|/)(?:[^\\/]+(?:\\|/))*[^\\/]+', texto)
@@ -76,11 +91,9 @@ class Graphic(ft.UserControl):
 
               if links:
                   pyperclip.copy(links[0])
-                  print(f"Link web copiado!")
 
               elif pastas:
                   pyperclip.copy(pastas[0])
-                  print(f"Caminho de rede copiado!")
 
               elif emails:
                 todos = ''
@@ -88,15 +101,20 @@ class Graphic(ft.UserControl):
                   todos = f'{todos} {email};'
 
                 pyperclip.copy(todos.strip())
-                print(f"E-mails copiados!")
 
           row = ft.Row(
               controls=[
                   ft.Checkbox(),
                   ft.Text(topico,size=15,text_align=ft.TextAlign.LEFT,expand=True),
                   ft.ElevatedButton(
-                      text="Copiar", 
-                      on_click=copy_topico  # Adiciona evento de clique
+                    content=self.button_img,
+                    on_click=copy_topico,  # Adiciona evento de clique
+                    style=ft.ButtonStyle(
+                        padding=ft.padding.all(0),  # Remove o padding
+                        elevation=0,                # Remove a sombra
+                        bgcolor=ft.colors.TRANSPARENT,   # Define o fundo como transparente
+                    ),
+                    tooltip=f"Copiar {found}"  # Definir o texto do tooltip
                   )
               ],
           )
