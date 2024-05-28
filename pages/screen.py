@@ -82,7 +82,8 @@ class Graphic(ft.UserControl):
           self.button_img = ft.Image(src="images/copiar-arquivo.png", width=40)
 
           if links:
-            found = 'Copiar Link da Web'
+            found = 'Abrir Link da Web'
+            self.button_img = ft.Image(src="images/web.png", width=40)
 
           elif pastas:
             found = 'Abrir Arquivo da Rede'
@@ -101,10 +102,11 @@ class Graphic(ft.UserControl):
 
               if links:
                   pyperclip.copy(links[0])
+                  os.startfile(links[0])
 
               elif pastas:
-                  os.startfile(pastas[0])
                   pyperclip.copy(pastas[0])
+                  os.startfile(pastas[0])
 
               elif emails:
                 todos = ''
