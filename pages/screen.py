@@ -83,13 +83,13 @@ class Graphic(ft.UserControl):
           found = ''
           self.button_img = ft.Image(src="images/copiar-arquivo.png", width=40)
 
-          if links:
-            found = 'Abrir Link da Web'
-            self.button_img = ft.Image(src="images/web.png", width=40)
-
-          elif emails:
+          if emails:
             found = 'Enviar E-mail'
             self.button_img = ft.Image(src="images/outlook.png", width=40)
+
+          elif links:
+            found = 'Abrir Link da Web'
+            self.button_img = ft.Image(src="images/web.png", width=40)
 
           elif pastas:
             found = 'Abrir Arquivo da Rede'
@@ -100,11 +100,7 @@ class Graphic(ft.UserControl):
               pastas = re.findall(r'[A-Za-z]:(?:\\|/)(?:[^\\/]+(?:\\|/))*[^\\/]+', texto)
               emails = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', texto)
 
-              if links:
-                  pyperclip.copy(links[0])
-                  os.startfile(links[0])
-
-              elif emails:
+              if emails:
                 parts = ''.join(texto).split('|')
                 subject = ''
                 to = ''
@@ -123,6 +119,10 @@ class Graphic(ft.UserControl):
                 pythoncom.CoInitialize()
                 Outlook().send_email(subject,to,body,cc,bcc,attachments)
                 pyperclip.copy(''.join(emails))
+
+              elif links:
+                  pyperclip.copy(links[0])
+                  os.startfile(links[0])
 
               elif pastas:
                   pyperclip.copy(pastas[0])
