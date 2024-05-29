@@ -1,11 +1,9 @@
 from extract import Dados
-from rotinas import *
+from rotinas import run_all
 import json
 import os
 
-diarios()
-semanais()
-mensais()
+run_all()
 
 data = Dados()
 path_daily = 'Q:\GROUPS\BR_SC_JGS_WM_LOGISTICA\PCP\PPC_AI_Procedures\ppc_secretary\daily'
@@ -55,7 +53,7 @@ for path in paths:
 
 #VERIFICAR STATUS DE INDICADORES
 #INDICADORES DIÁRIOS
-diarios = json.load(open('data/diarios.json', 'r', encoding='utf-8'))
+diarios = json.load(open('Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/diarios.json', 'r', encoding='utf-8'))
 historico.append({
     "role": "user",
     "parts": [
@@ -70,7 +68,7 @@ historico.append({
 })
 
 #INDICADORES SEMANAIS
-semanais = json.load(open('data/semanais.json', 'r', encoding='utf-8'))
+semanais = json.load(open('Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/semanais.json', 'r', encoding='utf-8'))
 historico.append({
     "role": "user",
     "parts": [
@@ -85,7 +83,7 @@ historico.append({
 })
 
 #INDICADORES MENSAIS
-mensais = json.load(open('data/mensais.json', 'r', encoding='utf-8'))
+mensais = json.load(open('Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/mensais.json', 'r', encoding='utf-8'))
 historico.append({
     "role": "user",
     "parts": [

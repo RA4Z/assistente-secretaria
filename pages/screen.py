@@ -66,7 +66,7 @@ class Graphic(ft.UserControl):
     self.loading.visible = True
     self.page.update()
 
-    indicadores = json.load(open(f'data/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
+    indicadores = json.load(open(f'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
     for indicador in indicadores:
       if indicador['Name'] == prompt and indicador['Status'] != 'Realizado':
         self.indicador.finish_button.visible = True
@@ -175,15 +175,15 @@ class Graphic(ft.UserControl):
 
   def finish(self, e):
     if self.indicador_atual != '':
-      indicadores = json.load(open(f'data/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
+      indicadores = json.load(open(f'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
       for indicador in indicadores:
         if indicador['Name'] == self.indicador_atual:
           indicador['Status'] = 'Realizado'
           indicador['LastUpdate'] = str(date.today())
-      json.dump(indicadores, open(f'data/{self.tabs.tab_selecionada}.json', 'w', encoding='utf-8'), indent=4)
+      json.dump(indicadores, open(f'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/{self.tabs.tab_selecionada}.json', 'w', encoding='utf-8'), indent=4)
 
       self.tabs.indicadores.controls.clear()
-      indicadores = json.load(open(f'data/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
+      indicadores = json.load(open(f'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/{self.tabs.tab_selecionada}.json', 'r', encoding='utf-8'))
       for indicador in indicadores:
         if indicador['Status'] == 'Pendente':
             cor = '#F9EC9B'

@@ -63,7 +63,7 @@ class Aba(ft.UserControl):
     def select_tab(self, selected:str, e):
         self.indicador_atual.value = f'Visualizando indicadores {selected}'
         self.tab_selecionada = selected
-        indicadores = json.load(open(f'data/{selected}.json', 'r', encoding='utf-8'))
+        indicadores = json.load(open(f'Q:/GROUPS/BR_SC_JGS_WM_LOGISTICA/PCP/PPC_AI_Procedures/ppc_secretary/indicadores/{selected}.json', 'r', encoding='utf-8'))
         self.indicadores.controls.clear()
         for indicador in indicadores:
             if indicador['Status'] == 'Pendente':
