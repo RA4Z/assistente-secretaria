@@ -11,8 +11,12 @@ sys.path.append(config_dir)
 
 from gemini import GeminiAI
 from rotinas import run_all
+from outlook import Outlook
 from components.Aba import Aba
 from components.Indicador import Indicador
+import pythoncom
+import win32com.client
+
 
 class Graphic(ft.UserControl):
   def __init__(self):
@@ -85,15 +89,16 @@ class Graphic(ft.UserControl):
             found = 'Abrir Link da Web'
             self.button_img = ft.Image(src="images/web.png", width=40)
 
-          elif pastas:
-            found = 'Abrir Arquivo da Rede'
-            self.button_img = ft.Image(src="images/abrir.png", width=40)
-
           elif emails:
+            self.button_img = ft.Image(src="images/outlook.png", width=40)
             if len(emails) > 1:
               found = 'Copiar Endereços de E-mail'
             else:
               found = 'Copiar Endereço de E-mail'
+
+          elif pastas:
+            found = 'Abrir Arquivo da Rede'
+            self.button_img = ft.Image(src="images/abrir.png", width=40)
              
           def copy_topico(e, texto=topico):
               links = re.findall(r'https?://(?:www\.)?[\w\d\-.]+\.[\w]{2,6}(?:/[\w\d\.\/\-_%&?=\+]+)?', texto)
@@ -104,16 +109,30 @@ class Graphic(ft.UserControl):
                   pyperclip.copy(links[0])
                   os.startfile(links[0])
 
+              elif emails:
+                parts = ''.join(texto).split('|')
+                subject = ''
+                to = ''
+                body = ''
+                cc = ''
+                bcc = ''
+                attachments = None
+                for part in parts:
+                   print(part)
+                   if part.strip().startswith('Title:'): subject = part.replace('Title:','')
+                   if part.strip().startswith('To:'): to = part.replace('To:','')
+                   if part.strip().startswith('Body:'): body = part.replace('Body:','')
+                   if part.strip().startswith('Copy:'): cc = part.replace('Copy:','')
+                   if part.strip().startswith('CCo:'): bcc = part.replace('CCo:','')
+                   if part.strip().startswith('Attachments:'): attachments = part.replace('Attachments:','').split(';')
+
+                pythoncom.CoInitialize()
+                Outlook().send_email(subject,to,body,cc,bcc,attachments)
+                pyperclip.copy(''.join(emails))
+
               elif pastas:
                   pyperclip.copy(pastas[0])
                   os.startfile(pastas[0])
-
-              elif emails:
-                todos = ''
-                for email in emails:
-                  todos = f'{todos} {email};'
-
-                pyperclip.copy(todos.strip())
 
           row = ft.Row(
               controls=[

@@ -61,6 +61,8 @@ class GeminiAI():
       Crie um resumo sobre o indicador correspondente ao comando, também informando a última data de atualização do mesmo e se ele está com o status Pendente ou Realizado, além disso mostre o caminho do documento word com o respectivo procedimento;
       se baseie nos dados do documento word com o procedimento do indicador {message} para entregar o resultado.
 
+      Quando aparecer 'Encaminhar EMAIL (', então colocar no mesmo tópico todo o texto até aparecer o ), semelhante ao ultimo tópico de exemplo
+
       CASO O INDICADOR {message} NÃO EXISTA, ENTÃO NO RESUMO DIGA QUE O INDICADOR NÃO FOI ENCONTRADO E ENTREGUE UM TÓPICO ESCRITO "Error 404";
       Siga o modelo abaixo para o output CASO O INDICADOR EXISTA:
       
@@ -70,6 +72,7 @@ class GeminiAI():
        <topico> Insira a variante ...
        <topico> Executar a transação
        <topico> Copiar materiais e inserir no arquivo ...
+       <topico> Encaminhar EMAIL ( | Title: ... | Body: ... | To (Campo opcional):... | Copy (Campo opcional):... | CCo (Campo opcional): ... | Attachments (Campo opcional): ... |)
 
        Resumo do indicador...
 
