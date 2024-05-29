@@ -15,8 +15,6 @@ from outlook import Outlook
 from components.Aba import Aba
 from components.Indicador import Indicador
 import pythoncom
-import win32com.client
-
 
 class Graphic(ft.UserControl):
   def __init__(self):
@@ -90,11 +88,8 @@ class Graphic(ft.UserControl):
             self.button_img = ft.Image(src="images/web.png", width=40)
 
           elif emails:
+            found = 'Enviar E-mail'
             self.button_img = ft.Image(src="images/outlook.png", width=40)
-            if len(emails) > 1:
-              found = 'Copiar Endereços de E-mail'
-            else:
-              found = 'Copiar Endereço de E-mail'
 
           elif pastas:
             found = 'Abrir Arquivo da Rede'
@@ -118,7 +113,6 @@ class Graphic(ft.UserControl):
                 bcc = ''
                 attachments = None
                 for part in parts:
-                   print(part)
                    if part.strip().startswith('Title:'): subject = part.replace('Title:','')
                    if part.strip().startswith('To:'): to = part.replace('To:','')
                    if part.strip().startswith('Body:'): body = part.replace('Body:','')
@@ -159,7 +153,12 @@ class Graphic(ft.UserControl):
                 ]
             )
 
-        self.indicador.tasks_view.controls.append(row)
+        self.indicador.tasks_view.controls.append(
+          ft.Column(
+          controls=[
+            ft.Divider(height=1),
+            row,
+          ]))
 
     self.indicador.indicador_atual.value = f"{self.app_text.get('procedure_description')} {prompt}:\n{resumo}"
     self.loading.visible = False
